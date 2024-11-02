@@ -11,6 +11,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 
 import androidx.navigation.NavHostController
 
@@ -19,7 +20,7 @@ import androidx.navigation.NavHostController
 @Composable
 fun TopBar(
     navController: NavHostController,
-    canNavigateBack: Boolean
+    canNavigateBack: MutableState<Boolean>
 ){
     CenterAlignedTopAppBar(
         title = {
@@ -28,9 +29,13 @@ fun TopBar(
         )
         },
         navigationIcon = {
-            if(canNavigateBack) {
+            if(canNavigateBack.value) {
                     IconButton(
-                        onClick = { navController.navigateUp() }
+                        onClick = {
+                            navController.navigateUp()
+                            canNavigateBack.value = false
+
+                        }
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Default.ArrowBack,

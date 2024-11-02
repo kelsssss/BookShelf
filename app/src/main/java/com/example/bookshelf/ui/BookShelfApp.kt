@@ -16,16 +16,20 @@ import com.example.bookshelf.ui.screens.TopBar
 import com.example.bookshelf.ui.theme.BookShelfTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
 fun BookShelfApp(){
     BookShelfTheme {
         val navController = rememberNavController()
 
+        var canNavigateBack = remember { mutableStateOf(false) }
+
+
         Scaffold(
             topBar = { TopBar(
                 navController = navController,
-                canNavigateBack = (navController.previousBackStackEntry != null)
+                canNavigateBack = canNavigateBack,
                 ) },
             modifier = Modifier
                 .fillMaxSize()
@@ -36,6 +40,7 @@ fun BookShelfApp(){
             ) {
                 composable(route = "BooksGrid") {
                     BookGrid(
+                        canNavigateBack = canNavigateBack,
                         navController = navController,
                         modifier = Modifier
                             .padding(innerPadding)
