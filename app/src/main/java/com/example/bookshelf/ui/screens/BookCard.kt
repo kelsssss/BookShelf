@@ -1,6 +1,7 @@
 package com.example.bookshelf.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,48 +18,49 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.bookshelf.R
 import com.example.bookshelf.ui.theme.BookShelfTheme
 
 @Composable
-fun BookCard(modifier: Modifier){
+fun BookCard(
+    modifier: Modifier,
+    navController: NavController
+){
     Card(modifier = modifier
-//        .width(250.dp)
         .height(300.dp)
         .padding(10.dp)
+        .clickable(
+            onClick = { navController.navigate("BookDescription")}
+        )
     ) {
         Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier
                 .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = painterResource(R.drawable.test_book_picture),
                 contentDescription = null,
+                contentScale = ContentScale.Crop,
                 modifier = modifier
                     .fillMaxSize()
-                    .weight(8f)
-//                    .padding(10.dp)
-                ,
-                contentScale = ContentScale.Crop
+                    .weight(8f),
+
             )
-//            Text(
-//                text = "Название книги",
-//                modifier = Modifier
-//                    .weight(1f)
-//            )
+
         }
     }
 }
 
 
-@Preview
-@Composable
-fun BookCardPreview(){
-    BookShelfTheme {
-        BookCard(
-            modifier = Modifier
-        )
-    }
-}
+//@Preview
+//@Composable
+//fun BookCardPreview(){
+//    BookShelfTheme {
+//        BookCard(
+//            modifier = Modifier
+//        )
+//    }
+//}
