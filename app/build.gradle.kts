@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.libs
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -57,6 +59,8 @@ dependencies {
     //coil and oKHttp
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+    //viewModel
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
 
     testImplementation(libs.junit)
