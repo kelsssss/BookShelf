@@ -1,4 +1,4 @@
-package com.example.bookshelf
+package com.example.bookshelf.model
 
 data class BooksData(
     val kind: String,
