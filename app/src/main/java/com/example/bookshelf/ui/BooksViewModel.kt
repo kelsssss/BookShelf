@@ -1,5 +1,6 @@
 package com.example.bookshelf.ui
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,24 +16,25 @@ class BooksViewModel: ViewModel() {
 
     private val repository = BooksRepository()
 
-    private var _books = mutableStateOf<BooksData>()
+    private lateinit var _books: MutableState<BooksData>
 //            MutableList<BookData> = mutableListOf()
+    var booksRecievedData = _books.value.items
 
     fun fetchBooks(){
         viewModelScope.launch {
             try{
                 val books = repository.getJazzData()
-
+                _books.value = books
             } catch (e: Exception){
-
+                //TODO("Обработать ошибку получения данных")
             }
         }
     }
 
 
-    init {
-        fetchBooks()
-    }
+//    init {
+//        fetchBooks()
+//    }
 
 
 }

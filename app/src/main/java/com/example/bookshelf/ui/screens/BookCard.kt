@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
@@ -22,7 +23,8 @@ import com.example.bookshelf.R
 fun BookCard(
     modifier: Modifier,
     navController: NavController,
-    canNavigateBack:  MutableState<Boolean>
+    canNavigateBack:  MutableState<Boolean>,
+    bookTitle: String
 ){
     Card(modifier = modifier
         .height(300.dp)
@@ -48,6 +50,11 @@ fun BookCard(
                     .fillMaxSize()
                     .weight(8f),
 
+            )
+            //TODO("delete this text composable(it is for test)")
+
+            Text(
+                text = bookTitle
             )
 
         }
