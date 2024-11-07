@@ -24,17 +24,13 @@ sealed interface AppStatus{
 }
 
 
-
-
-
-
-class BooksViewModel(appStatus: AppStatus): ViewModel() {
+class BooksViewModel(): ViewModel() {
 
     private val repository = BooksRepository()
 
-    private lateinit var _books: MutableState<BooksData>
+//    private lateinit var _books: MutableState<BooksData>
 //            MutableList<BookData> = mutableListOf()
-    var booksRecievedData = _books.value.items
+//    var booksRecievedData = _books.value.items
 
     var appStatus: AppStatus by mutableStateOf(AppStatus.Loading)
         private set
@@ -44,19 +40,19 @@ class BooksViewModel(appStatus: AppStatus): ViewModel() {
         viewModelScope.launch {
             try{
                 val books = repository.getJazzData()
-                _books.value = books
-                appStatus = AppStatus.Success(_books.value.items)
+//                _books.value = books
+                appStatus = AppStatus.Success(books.items)
             } catch (e: Exception){
-                //TODO("Обработать ошибку получения данных")
+                //Обработать ошибку получения данных
                 appStatus = AppStatus.Error
             }
         }
     }
 
 
-    init {
-        fetchBooks()
-    }
+//    init {
+//        fetchBooks()
+//    }
 
 
 }

@@ -23,9 +23,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
-fun BookShelfApp(
-    viewModel: BooksViewModel
-){
+fun BookShelfApp(){
 
 
     BookShelfTheme {
@@ -33,14 +31,12 @@ fun BookShelfApp(
 
         var canNavigateBack = remember { mutableStateOf(false) }
 
+        var viewModel: BooksViewModel = viewModel()
 
         LaunchedEffect(Unit) {
             viewModel.fetchBooks()
         }
 
-
-
-//        if(viewModel.booksRecievedData){
 
             Scaffold(
                 topBar = {
@@ -60,8 +56,8 @@ fun BookShelfApp(
                         BookGrid(
                             canNavigateBack = canNavigateBack,
                             navController = navController,
-                            recievedBookDataList = viewModel.booksRecievedData,
-
+                            recievedBookDataList = viewModel.,
+                            appStatus = viewModel.appStatus,
                             modifier = Modifier
                                 .padding(innerPadding)
                         )

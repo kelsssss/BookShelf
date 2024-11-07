@@ -19,12 +19,12 @@ import com.example.bookshelf.ui.screens.TopBar
 import com.example.bookshelf.ui.theme.BookShelfTheme
 
 class MainActivity : ComponentActivity() {
-    val viewModel: BooksViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            BookShelfApp(viewModel = viewModel)
+            BookShelfApp()
         }
     }
 }
