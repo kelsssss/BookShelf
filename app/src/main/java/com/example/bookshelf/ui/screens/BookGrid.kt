@@ -25,13 +25,7 @@ fun BookGrid(
             .fillMaxSize()
 
     ) {
-//        items(30){
-//            BookCard(
-//                navController = navController,
-//                canNavigateBack = canNavigateBack,
-//                modifier = Modifier
-//            )
-//        }
+
         items(recievedBookDataList){ book ->
             BookCard(
                 navController = navController,

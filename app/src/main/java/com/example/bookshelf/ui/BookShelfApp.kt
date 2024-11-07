@@ -26,6 +26,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun BookShelfApp(
     viewModel: BooksViewModel
 ){
+
+
     BookShelfTheme {
         val navController = rememberNavController()
 
@@ -36,7 +38,9 @@ fun BookShelfApp(
             viewModel.fetchBooks()
         }
 
-        if(viewModel.booksRecievedData.isNotEmpty()){
+
+
+//        if(viewModel.booksRecievedData){
 
             Scaffold(
                 topBar = {
@@ -69,7 +73,7 @@ fun BookShelfApp(
 
 
             }
-        }
+//        }
     }
 }
 
