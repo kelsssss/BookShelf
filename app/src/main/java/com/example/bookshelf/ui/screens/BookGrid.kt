@@ -11,22 +11,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.bookshelf.model.BookData
 import com.example.bookshelf.ui.AppStatus
+import com.example.bookshelf.ui.BooksViewModel
 import com.example.bookshelf.ui.theme.BookShelfTheme
 
 @Composable
 fun BookGrid(
-    appStatus: AppStatus,
-    recievedBookDataList: List<BookData>,
+    booksViewModel: BooksViewModel,
+//    appStatus: AppStatus,
+//    recievedBookDataList: List<BookData>,
     canNavigateBack: MutableState<Boolean>,
     navController: NavController,
     modifier: Modifier
 ){
+    val appStatus = booksViewModel.appStatus
+
     when(appStatus) {
-        AppStatus.Loading -> {
+        is AppStatus.Loading -> {
             LoadingScreen()
         }
 
-        AppStatus.Success(books = recievedBookDataList) -> {
+        is AppStatus.Success -> {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 modifier = modifier
@@ -34,7 +38,7 @@ fun BookGrid(
 
             ) {
 
-                items(recievedBookDataList) { book ->
+                items(appStatus.booksDataList) { book ->
                     BookCard(
                         navController = navController,
                         canNavigateBack = canNavigateBack,
