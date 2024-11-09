@@ -4,6 +4,6 @@ import com.example.bookshelf.model.BooksData
 import retrofit2.http.GET
 
 interface BooksApiService{
-    @GET("/volumes?q=jazz")
+    @GET("volumes?q=jazz")
     suspend fun getJazzData(): BooksData
 }

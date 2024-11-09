@@ -6,7 +6,7 @@ import retrofit2.create
 
 object RetrofitInstance {
 
-    val BASE_URL = "https://www.googleapis.com/books/v1"
+    val BASE_URL = "https://www.googleapis.com/books/v1/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

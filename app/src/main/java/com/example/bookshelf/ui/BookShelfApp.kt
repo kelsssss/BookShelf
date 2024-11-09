@@ -3,6 +3,7 @@ package com.example.bookshelf.ui
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,18 +26,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 @Composable
 fun BookShelfApp(){
 
-    var viewModel: BooksViewModel = viewModel()
-
-//    LaunchedEffect(Unit) {
-//        viewModel.fetchBooks()
-//    }
-
     val navController = rememberNavController()
 
     var canNavigateBack = remember { mutableStateOf(false) }
-
-
-
 
 
     BookShelfTheme {
@@ -51,23 +43,29 @@ fun BookShelfApp(){
                 modifier = Modifier
                     .fillMaxSize()
             ) { innerPadding ->
-                NavHost(
-                    navController = navController,
-                    startDestination = "BooksGrid"
-                ) {
-                    composable(route = "BooksGrid") {
-                        BookGrid(
-                            canNavigateBack = canNavigateBack,
-                            navController = navController,
-//                            recievedBookDataList = viewModel.
-//                            appStatus = viewModel.appStatus,
-                            booksViewModel = viewModel,
-                            modifier = Modifier
-                                .padding(innerPadding)
-                        )
-                    }
-                    composable(route = "BookDescription") {
-                        DescriptionScreen()
+
+                Surface {
+
+                    var viewModel: BooksViewModel = viewModel()
+
+                    val appStatus = viewModel.appStatus
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = "BooksGrid"
+                    ) {
+                        composable(route = "BooksGrid") {
+                            BookGrid(
+                                canNavigateBack = canNavigateBack,
+                                navController = navController,
+                                appStatus = appStatus,
+                                modifier = Modifier
+                                    .padding(innerPadding)
+                            )
+                        }
+                        composable(route = "BookDescription") {
+                            DescriptionScreen()
+                        }
                     }
                 }
 

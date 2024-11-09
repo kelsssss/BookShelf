@@ -16,14 +16,11 @@ import com.example.bookshelf.ui.theme.BookShelfTheme
 
 @Composable
 fun BookGrid(
-    booksViewModel: BooksViewModel,
-//    appStatus: AppStatus,
-//    recievedBookDataList: List<BookData>,
+    appStatus: AppStatus,
     canNavigateBack: MutableState<Boolean>,
     navController: NavController,
     modifier: Modifier
 ){
-    val appStatus = booksViewModel.appStatus
 
     when(appStatus) {
         is AppStatus.Loading -> {

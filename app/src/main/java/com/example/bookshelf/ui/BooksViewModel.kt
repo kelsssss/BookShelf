@@ -34,10 +34,6 @@ class BooksViewModel(): ViewModel() {
 
     private val repository = BooksRepository()
 
-//    private lateinit var _books: MutableState<BooksData>
-//            MutableList<BookData> = mutableListOf()
-
-
     var appStatus: AppStatus by mutableStateOf(AppStatus.Loading)
         private set
 
@@ -45,29 +41,17 @@ class BooksViewModel(): ViewModel() {
     fun fetchBooks(){
         viewModelScope.launch {
             appStatus = try{
-//                val books = repository.getJazzData().items
                 AppStatus.Success(booksDataList = repository.getJazzData().items)
             } catch (e: RuntimeException){
                 AppStatus.Error
             } catch (e: IOException) {
            AppStatus.Error
-        } catch (e: HttpException){
+             } catch (e: HttpException){
             AppStatus.Error
-        }
+             }
 
         }
     }
-
-
-//    companion object {
-//        val Factory: ViewModelProvider.Factory = viewModelFactory {
-//            initializer {
-//                val application = (this[APPLICATION_KEY] as AmphibiansApplication)
-//                val amphibiansRepository = application.container.amphibiansRepository
-//                AmphibianViewModel(amphibiansRepository = amphibiansRepository)
-//            }
-//        }
-//    }
 
 
     init {
