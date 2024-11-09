@@ -17,6 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil3.compose.AsyncImage
 import com.example.bookshelf.R
 
 @Composable
@@ -24,13 +25,16 @@ fun BookCard(
     modifier: Modifier,
     navController: NavController,
     canNavigateBack:  MutableState<Boolean>,
-    bookTitle: String
+    bookTitle: String,
+    bookImgUrl: String,
+    bookId: String,
 ){
     Card(modifier = modifier
         .height(300.dp)
         .padding(10.dp)
         .clickable(
             onClick = {
+
                 navController.navigate("BookDescription")
                 canNavigateBack.value = true
             }
@@ -42,16 +46,26 @@ fun BookCard(
             modifier = modifier
                 .fillMaxSize(),
         ) {
-            Image(
-                painter = painterResource(R.drawable.test_book_picture),
+//            Image(
+//                painter = painterResource(R.drawable.test_book_picture),
+//                contentDescription = null,
+//                contentScale = ContentScale.Crop,
+//                modifier = modifier
+//                    .fillMaxSize()
+//                    .weight(8f),
+//
+//            )
+
+            AsyncImage(
+//                model = "https://books.google.com/books/content?id=1LY4AQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+                model = bookImgUrl,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = modifier
                     .fillMaxSize()
                     .weight(8f),
-
             )
-            //TODO("delete this text composable(it is for test)")
+
 
             Text(
                 text = bookTitle

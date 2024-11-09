@@ -40,6 +40,8 @@ fun BookGrid(
                         navController = navController,
                         canNavigateBack = canNavigateBack,
                         bookTitle = book.volumeInfo.title,
+                        bookImgUrl = book.volumeInfo.imageLinks.thumbnail,
+                        bookId = book.id,
                         modifier = Modifier
                     )
                 }
