@@ -12,7 +12,6 @@ object RetrofitInstance {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-
     val booksApiService: BooksApiService by lazy {
         retrofit.create(BooksApiService::class.java)
     }

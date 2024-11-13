@@ -9,10 +9,12 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.bookshelf.ui.AppStatus
+import com.example.bookshelf.ui.BooksViewModel
 
 @Composable
 fun BookGrid(
     appStatus: AppStatus,
+    viewModel: BooksViewModel,
     canNavigateBack: MutableState<Boolean>,
     navController: NavController,
     modifier: Modifier
@@ -36,18 +38,17 @@ fun BookGrid(
                 columns = GridCells.Fixed(2),
                 modifier = modifier
                     .fillMaxSize()
-
             ) {
-
                 items(appStatus.booksDataList) { book ->
                     BookCard(
                         navController = navController,
                         canNavigateBack = canNavigateBack,
                         bookTitle = book.volumeInfo.title,
                         bookImgUrl = book.volumeInfo.imageLinks.thumbnail,
+                        viewModel = viewModel,
 
                         //For a book description
-                        //bookId = book.id,
+                        bookId = book.id,
                         modifier = Modifier
                     )
                 }

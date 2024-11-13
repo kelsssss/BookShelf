@@ -39,7 +39,6 @@ fun BookShelfApp() {
                 .fillMaxSize()
         ) { innerPadding ->
             Surface {
-
                 val appStatus = viewModel.appStatus
 
                 NavHost(
@@ -51,12 +50,15 @@ fun BookShelfApp() {
                             canNavigateBack = canNavigateBack,
                             navController = navController,
                             appStatus = appStatus,
+                            viewModel = viewModel,
                             modifier = Modifier
                                 .padding(innerPadding)
                         )
                     }
                     composable(route = "BookDescription") {
-                        DescriptionScreen()
+                        DescriptionScreen(
+                            viewModel = viewModel,
+                        )
                     }
                 }
             }

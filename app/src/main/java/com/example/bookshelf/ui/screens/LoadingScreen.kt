@@ -30,7 +30,7 @@ fun LoadingScreen(
         ) {
             Image(
                 painter = painterResource(R.drawable.loading),
-                contentDescription = "Error occurred",
+                contentDescription = "Loading",
                 modifier = modifier
                     .fillMaxWidth(0.4f)
             )

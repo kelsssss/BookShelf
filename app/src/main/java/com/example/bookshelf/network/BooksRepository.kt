@@ -1,5 +1,6 @@
 package com.example.bookshelf.network
 
+import com.example.bookshelf.model.BookData
 import com.example.bookshelf.model.BooksData
 
 
@@ -9,6 +10,10 @@ class BooksRepository {
 
     suspend fun getSearchBookData(query: String): BooksData {
         return booksService.getSearchBooksData(query = query)
+    }
+
+    suspend fun getDescriptionById(id: String) : BookData {
+        return booksService.getDescriptionById(id = id)
     }
 
 }

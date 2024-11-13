@@ -10,30 +10,36 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
+import com.example.bookshelf.ui.BooksViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun BookCard(
     modifier: Modifier,
+    viewModel: BooksViewModel,
     navController: NavController,
     canNavigateBack: MutableState<Boolean>,
     bookTitle: String,
     bookImgUrl: String,
 
     //for a book description(later)
-    //bookId: String,
+    bookId: String,
 ) {
+
     Card(modifier = modifier
         .height(300.dp)
         .padding(10.dp)
         .clickable(
             onClick = {
-
+                viewModel.bookId = bookId
                 navController.navigate("BookDescription")
                 canNavigateBack.value = true
             }

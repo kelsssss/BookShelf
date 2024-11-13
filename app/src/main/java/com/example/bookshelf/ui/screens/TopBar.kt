@@ -79,6 +79,7 @@ fun TopBar(
                         onClick = {
                             isSearching.value = !isSearching.value
                             viewModel.closeSearchBar()
+                            navController.navigateUp()
 
                         }
                     ) {
