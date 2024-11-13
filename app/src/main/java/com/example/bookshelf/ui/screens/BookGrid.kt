@@ -23,6 +23,11 @@ fun BookGrid(
 ){
 
     when(appStatus) {
+        is AppStatus.NothingFound -> {
+            NothingFoundScreen()
+        }
+
+
         is AppStatus.Welcome ->{
             WelcomeScreen()
         }

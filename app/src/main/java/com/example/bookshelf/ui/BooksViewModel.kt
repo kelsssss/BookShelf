@@ -28,6 +28,7 @@ sealed interface AppStatus{
     object Loading : AppStatus
     object Error : AppStatus
     object Welcome : AppStatus
+    object NothingFound : AppStatus
 }
 
 
@@ -50,6 +51,8 @@ class BooksViewModel(): ViewModel() {
            AppStatus.Error
              } catch (e: HttpException){
             AppStatus.Error
+             } catch (e: Exception){
+                AppStatus.Error
              }
 
         }
@@ -63,10 +66,12 @@ class BooksViewModel(): ViewModel() {
             appStatus = try{
                 AppStatus.Success(booksDataList = repository.getSearchBookData(query = enteredQuery).items)
             } catch (e: RuntimeException){
-                AppStatus.Error
+                AppStatus.NothingFound
             } catch (e: IOException) {
                 AppStatus.Error
             } catch (e: HttpException){
+                AppStatus.Error
+            } catch (e: Exception){
                 AppStatus.Error
             }
 
