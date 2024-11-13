@@ -38,10 +38,7 @@ fun SearchField(
                     coroutineScope.launch {
                         viewModel.fetchSearchBooks(enteredQuery = it)
                     }
-
-
-
-
+                    expanded.value = false
                 },
                 expanded = expanded.value,
                 onExpandedChange = { newExpandedValue ->

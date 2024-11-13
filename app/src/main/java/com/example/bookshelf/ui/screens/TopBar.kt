@@ -5,6 +5,8 @@ import androidx.compose.material.icons.Icons
 
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -65,15 +67,34 @@ fun TopBar(
             }
         },
         actions = {
-            IconButton(
-                onClick = {
-                    isSearching.value = !isSearching.value
+            when (isSearching.value) {
+                false -> {
+                    IconButton(
+                        onClick = {
+                            isSearching.value = !isSearching.value
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Search,
+                            contentDescription = "Search button"
+                        )
+                    }
                 }
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Search,
-                    contentDescription = "Search button"
-                )
+                true -> {
+                    IconButton(
+                        onClick = {
+
+                            isSearching.value = !isSearching.value
+
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Close,
+                            contentDescription = "Close button"
+                        )
+                    }
+                }
+
             }
         }
     )
