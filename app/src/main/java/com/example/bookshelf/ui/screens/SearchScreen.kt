@@ -1,11 +1,16 @@
 package com.example.bookshelf.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
@@ -32,6 +37,9 @@ fun SearchScreen(
     val searchText = remember { mutableStateOf("") }
     val expanded = remember { mutableStateOf(false) }
 
+    //Для проверки используется список и для истории и для тестовых результатов
+    val mainList = remember { mutableStateOf(Utils.testBookNames) }
+
 
     Surface {
         Column(
@@ -54,9 +62,10 @@ fun SearchScreen(
                         query = searchText.value,
                         onQueryChange = { text ->
                                 searchText.value = text
+                                mainList.value = Utils.search(text)
                         },
                         onSearch = { text ->
-
+                            mainList.value = Utils.search(text)
                             expanded.value = false
 
                         },
@@ -76,7 +85,31 @@ fun SearchScreen(
                 modifier = modifier
                     .fillMaxWidth()
             ) {
-                Text(text = "Hello")
+//                Text(text = "Hello")
+                LazyColumn(
+                    modifier = modifier
+                        .fillMaxWidth()
+                ) {
+                    items(mainList.value){ item ->
+                        Box(
+                            modifier = modifier
+                                .fillMaxWidth()
+                                .padding(10.dp)
+                                .clickable {
+                                    mainList.value = Utils.search(item)
+                                    expanded.value = false
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = item)
+                        }
+                    }
+                }
+            }
+            LazyColumn {
+                items(mainList.value){ item ->
+                    Text(text = item)
+                }
             }
         }
     }
@@ -88,4 +121,39 @@ fun SearchScreenPreview(){
     BookShelfTheme() {
         SearchScreen()
     }
+}
+
+object Utils{
+    fun search(text: String) : List<String> {
+        return testBookNames.filter {
+            it.startsWith(text, ignoreCase = true)
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    val testBookNames = listOf(
+        "Fight Club",
+        "Kolobok",
+        "Maths",
+        "Grokaem algoritmy",
+        "Johny got his rifle"
+    )
+
+
+
 }
