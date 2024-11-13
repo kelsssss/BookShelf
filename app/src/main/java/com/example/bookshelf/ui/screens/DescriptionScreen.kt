@@ -17,7 +17,7 @@ import com.example.bookshelf.R
 import com.example.bookshelf.ui.theme.BookShelfTheme
 
 @Composable
-fun DescriptionScreen(modifier: Modifier = Modifier){
+fun DescriptionScreen(modifier: Modifier = Modifier) {
 
     Surface(
         modifier = modifier
@@ -54,7 +54,7 @@ fun DescriptionScreen(modifier: Modifier = Modifier){
 
 @Preview
 @Composable
-fun DescriptionScreenPreview(){
+fun DescriptionScreenPreview() {
     BookShelfTheme {
         DescriptionScreen()
     }

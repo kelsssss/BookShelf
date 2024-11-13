@@ -1,6 +1,6 @@
 package com.example.bookshelf.model
 
-data class imageLinks(
-    val smallThumbnail : String,
+data class ImageLinks(
+    val smallThumbnail: String,
     val thumbnail: String,
 )

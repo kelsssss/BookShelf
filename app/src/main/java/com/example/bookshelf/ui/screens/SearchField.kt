@@ -5,7 +5,6 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -17,15 +16,13 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchField(
-    modifier : Modifier = Modifier,
+    modifier: Modifier = Modifier,
     viewModel: BooksViewModel
-){
-    val searchText = remember { mutableStateOf("")}
-    val expanded = remember { mutableStateOf(false)}
+) {
+    val searchText = remember { mutableStateOf("") }
+    val expanded = remember { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
-
-
 
     SearchBar(
         inputField = {

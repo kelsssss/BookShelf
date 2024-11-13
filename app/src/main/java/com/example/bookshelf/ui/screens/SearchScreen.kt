@@ -17,17 +17,17 @@ import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bookshelf.ui.theme.BookShelfTheme
-import kotlinx.coroutines.flow.MutableStateFlow
+
+//ЭТОТ ФАЙЛ ПОКА ЧТО НЕ ИСПОЛЬЗУЕТСЯ В ПРОЕКТЕ
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,8 +61,8 @@ fun SearchScreen(
                     SearchBarDefaults.InputField(
                         query = searchText.value,
                         onQueryChange = { text ->
-                                searchText.value = text
-                                mainList.value = Utils.search(text)
+                            searchText.value = text
+                            mainList.value = Utils.search(text)
                         },
                         onSearch = { text ->
                             mainList.value = Utils.search(text)
@@ -90,7 +90,7 @@ fun SearchScreen(
                     modifier = modifier
                         .fillMaxWidth()
                 ) {
-                    items(mainList.value){ item ->
+                    items(mainList.value) { item ->
                         Box(
                             modifier = modifier
                                 .fillMaxWidth()
@@ -107,7 +107,7 @@ fun SearchScreen(
                 }
             }
             LazyColumn {
-                items(mainList.value){ item ->
+                items(mainList.value) { item ->
                     Text(text = item)
                 }
             }
@@ -117,33 +117,19 @@ fun SearchScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun SearchScreenPreview(){
+fun SearchScreenPreview() {
     BookShelfTheme() {
         SearchScreen()
     }
 }
 
-object Utils{
-    fun search(text: String) : List<String> {
+object Utils {
+    fun search(text: String): List<String> {
         return testBookNames.filter {
             it.startsWith(text, ignoreCase = true)
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     val testBookNames = listOf(
@@ -153,7 +139,6 @@ object Utils{
         "Grokaem algoritmy",
         "Johny got his rifle"
     )
-
 
 
 }
