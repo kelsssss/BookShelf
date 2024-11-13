@@ -47,14 +47,13 @@ fun BookShelfApp(){
                 modifier = Modifier
                     .fillMaxSize()
             ) { innerPadding ->
-
                 Surface {
 
                     val appStatus = viewModel.appStatus
 
                     NavHost(
                         navController = navController,
-                        startDestination = "WelcomeScreen"
+                        startDestination = "BooksGrid"
                     ) {
                         composable(route = "BooksGrid") {
                             BookGrid(
