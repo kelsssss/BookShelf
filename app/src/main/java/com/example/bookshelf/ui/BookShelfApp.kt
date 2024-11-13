@@ -28,7 +28,9 @@ fun BookShelfApp(){
 
     val navController = rememberNavController()
 
-    var canNavigateBack = remember { mutableStateOf(false) }
+    val canNavigateBack = remember { mutableStateOf(false) }
+
+    val viewModel: BooksViewModel = viewModel()
 
 
     BookShelfTheme {
@@ -38,6 +40,7 @@ fun BookShelfApp(){
                     TopBar(
                         navController = navController,
                         canNavigateBack = canNavigateBack,
+                        viewModel = viewModel
                     )
                 },
                 modifier = Modifier
@@ -46,7 +49,7 @@ fun BookShelfApp(){
 
                 Surface {
 
-                    var viewModel: BooksViewModel = viewModel()
+
 
                     val appStatus = viewModel.appStatus
 

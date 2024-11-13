@@ -53,10 +53,29 @@ class BooksViewModel(): ViewModel() {
         }
     }
 
+    fun fetchSearchBooks(
+        enteredQuery : String
+    ){
+        viewModelScope.launch {
+            appStatus = try{
+                AppStatus.Success(booksDataList = repository.getSearchBookData(query = enteredQuery).items)
+            } catch (e: RuntimeException){
+                AppStatus.Error
+            } catch (e: IOException) {
+                AppStatus.Error
+            } catch (e: HttpException){
+                AppStatus.Error
+            }
 
-    init {
-        fetchBooks()
+        }
     }
+
+
+
+
+//    init {
+//        fetchBooks()
+//    }
 
 
 }

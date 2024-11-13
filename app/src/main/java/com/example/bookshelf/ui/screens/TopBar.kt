@@ -20,13 +20,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 
 import androidx.navigation.NavHostController
+import com.example.bookshelf.ui.BooksViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
     navController: NavHostController,
-    canNavigateBack: MutableState<Boolean>
+    canNavigateBack: MutableState<Boolean>,
+    viewModel: BooksViewModel,
 ){
     val isSearching = remember { mutableStateOf(false) }
 
@@ -34,9 +36,9 @@ fun TopBar(
         title = {
         when(isSearching.value){
           true -> {
-              SearchBar(
-
-              ) { }
+              SearchField(
+                  viewModel = viewModel
+              )
           }
             false -> {
                 Text(
