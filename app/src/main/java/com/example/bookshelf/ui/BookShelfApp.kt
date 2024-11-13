@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.bookshelf.ui.screens.WelcomeScreen
 
 @Composable
 fun BookShelfApp(){
@@ -49,13 +50,11 @@ fun BookShelfApp(){
 
                 Surface {
 
-
-
                     val appStatus = viewModel.appStatus
 
                     NavHost(
                         navController = navController,
-                        startDestination = "BooksGrid"
+                        startDestination = "WelcomeScreen"
                     ) {
                         composable(route = "BooksGrid") {
                             BookGrid(

@@ -27,6 +27,7 @@ sealed interface AppStatus{
     data class Success(val booksDataList: List<BookData>) : AppStatus
     object Loading : AppStatus
     object Error : AppStatus
+    object Welcome : AppStatus
 }
 
 
@@ -34,12 +35,13 @@ class BooksViewModel(): ViewModel() {
 
     private val repository = BooksRepository()
 
-    var appStatus: AppStatus by mutableStateOf(AppStatus.Loading)
+    var appStatus: AppStatus by mutableStateOf(AppStatus.Welcome)
         private set
 
 
     fun fetchBooks(){
         viewModelScope.launch {
+            appStatus = AppStatus.Loading
             appStatus = try{
                 AppStatus.Success(booksDataList = repository.getJazzData().items)
             } catch (e: RuntimeException){
@@ -57,6 +59,7 @@ class BooksViewModel(): ViewModel() {
         enteredQuery : String
     ){
         viewModelScope.launch {
+            appStatus = AppStatus.Loading
             appStatus = try{
                 AppStatus.Success(booksDataList = repository.getSearchBookData(query = enteredQuery).items)
             } catch (e: RuntimeException){

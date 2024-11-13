@@ -23,6 +23,11 @@ fun BookGrid(
 ){
 
     when(appStatus) {
+        is AppStatus.Welcome ->{
+            WelcomeScreen()
+        }
+
+
         is AppStatus.Loading -> {
             LoadingScreen()
         }
