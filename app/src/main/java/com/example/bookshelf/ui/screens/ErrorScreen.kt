@@ -48,7 +48,6 @@ fun ErrorScreen(
             )
             Button(
                 onClick = { },
-//                colors = ButtonDefaults.buttonColors(containerColor = Color.)
             ) {
                 Text(
                     "Try again"

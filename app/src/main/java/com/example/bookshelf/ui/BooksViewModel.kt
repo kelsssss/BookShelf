@@ -66,6 +66,7 @@ class BooksViewModel() : ViewModel() {
         id : String
     ) {
         viewModelScope.launch{
+            descriptionStatus = DescriptionStatus.Loading
             descriptionStatus = try {
                 DescriptionStatus.Success(receivedBookData = repository.getDescriptionById(id = id).volumeInfo)
             } catch (e: RuntimeException) {

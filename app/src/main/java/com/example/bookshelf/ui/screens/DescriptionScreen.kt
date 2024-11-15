@@ -12,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.bookshelf.R
 import com.example.bookshelf.model.VolumeInfo
@@ -32,14 +34,17 @@ import kotlinx.coroutines.launch
 @Composable
 fun DescriptionScreen(
     viewModel: BooksViewModel,
+    canNavigateBack : MutableState<Boolean>,
+    navController : NavHostController,
     modifier: Modifier = Modifier,
 ) {
+
 
     LaunchedEffect(Unit) {
         viewModel.fetchBookById(viewModel.bookId)
     }
 
-    var descriptionStatus = viewModel.descriptionStatus
+    val descriptionStatus = viewModel.descriptionStatus
 
 
     when(descriptionStatus){
@@ -50,6 +55,7 @@ fun DescriptionScreen(
             ErrorScreen()
         }
         is DescriptionStatus.Success -> {
+            canNavigateBack.value = (navController.previousBackStackEntry != null)
             DescriptionSuccessScreen(
                 receivedBookData = descriptionStatus.receivedBookData,
                 modifier = modifier,

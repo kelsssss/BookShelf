@@ -21,35 +21,29 @@ import com.example.bookshelf.ui.theme.BookShelfTheme
 fun BookShelfApp() {
 
     val navController = rememberNavController()
-    val canNavigateBack = remember { mutableStateOf(false) }
+    val canNavigateBack = remember { mutableStateOf(navController.previousBackStackEntry != null) }
     val viewModel: BooksViewModel = viewModel()
 
 
     BookShelfTheme {
-
         Scaffold(
             topBar = {
                 TopBar(
                     navController = navController,
-                    canNavigateBack = canNavigateBack,
+                    canNavigateBack = canNavigateBack.value,
                     viewModel = viewModel
                 )
             },
             modifier = Modifier
                 .fillMaxSize()
         ) { innerPadding ->
-            Surface {
-                val appStatus = viewModel.appStatus
-
                 NavHost(
                     navController = navController,
                     startDestination = "BooksGrid"
                 ) {
                     composable(route = "BooksGrid") {
                         BookGrid(
-                            canNavigateBack = canNavigateBack,
                             navController = navController,
-                            appStatus = appStatus,
                             viewModel = viewModel,
                             modifier = Modifier
                                 .padding(innerPadding)
@@ -58,6 +52,8 @@ fun BookShelfApp() {
                     composable(route = "BookDescription") {
                         DescriptionScreen(
                             viewModel = viewModel,
+                            canNavigateBack = canNavigateBack,
+                            navController = navController,
                         )
                     }
                 }
@@ -65,7 +61,7 @@ fun BookShelfApp() {
 
 
         }
-//        }
-    }
+
+
 }
 

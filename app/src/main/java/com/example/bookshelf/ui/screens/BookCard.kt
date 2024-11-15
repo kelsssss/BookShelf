@@ -26,11 +26,8 @@ fun BookCard(
     modifier: Modifier,
     viewModel: BooksViewModel,
     navController: NavController,
-    canNavigateBack: MutableState<Boolean>,
     bookTitle: String,
     bookImgUrl: String,
-
-    //for a book description(later)
     bookId: String,
 ) {
 
@@ -41,7 +38,6 @@ fun BookCard(
             onClick = {
                 viewModel.bookId = bookId
                 navController.navigate("BookDescription")
-                canNavigateBack.value = true
             }
         )
     ) {

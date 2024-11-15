@@ -21,8 +21,10 @@ import com.example.bookshelf.ui.BooksViewModel
 @Composable
 fun TopBar(
     navController: NavHostController,
-    canNavigateBack: MutableState<Boolean>,
+//    canNavigateBack: MutableState<Boolean>,
+    canNavigateBack: Boolean,
     viewModel: BooksViewModel,
+
 ) {
     val isSearching = remember { mutableStateOf(false) }
 
@@ -44,12 +46,10 @@ fun TopBar(
 
         },
         navigationIcon = {
-            if (canNavigateBack.value) {
+            if(canNavigateBack) {
                 IconButton(
                     onClick = {
                         navController.navigateUp()
-                        canNavigateBack.value = false
-
                     }
                 ) {
                     Icon(

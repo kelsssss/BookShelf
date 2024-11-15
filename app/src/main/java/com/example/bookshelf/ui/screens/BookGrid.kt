@@ -13,12 +13,11 @@ import com.example.bookshelf.ui.BooksViewModel
 
 @Composable
 fun BookGrid(
-    appStatus: AppStatus,
     viewModel: BooksViewModel,
-    canNavigateBack: MutableState<Boolean>,
     navController: NavController,
     modifier: Modifier
 ) {
+    val appStatus = viewModel.appStatus
 
     when (appStatus) {
         is AppStatus.NothingFound -> {
@@ -42,7 +41,6 @@ fun BookGrid(
                 items(appStatus.booksDataList) { book ->
                     BookCard(
                         navController = navController,
-                        canNavigateBack = canNavigateBack,
                         bookTitle = book.volumeInfo.title,
                         bookImgUrl = book.volumeInfo.imageLinks.thumbnail,
                         viewModel = viewModel,
