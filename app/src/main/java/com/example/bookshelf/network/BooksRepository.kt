@@ -4,8 +4,8 @@ import com.example.bookshelf.model.BookData
 import com.example.bookshelf.model.BooksData
 
 
-class BooksRepository {
-    private val booksService = RetrofitInstance.booksApiService
+class BooksRepository(val booksService: BooksApiService) {
+//    private val booksService = RetrofitInstance.booksApiService
 
 
     suspend fun getSearchBookData(query: String): BooksData {

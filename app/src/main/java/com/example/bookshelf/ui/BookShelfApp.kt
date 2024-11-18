@@ -22,7 +22,7 @@ fun BookShelfApp() {
 
     val navController = rememberNavController()
     val canNavigateBack = remember { mutableStateOf(navController.previousBackStackEntry != null) }
-    val viewModel: BooksViewModel = viewModel()
+    val viewModel: BooksViewModel = viewModel(factory = BooksViewModel.factory)
 
 
     BookShelfTheme {

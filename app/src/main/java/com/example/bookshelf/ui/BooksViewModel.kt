@@ -4,8 +4,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.network.HttpException
+import com.example.bookshelf.BookShelfApplication
 import com.example.bookshelf.model.BookData
 import com.example.bookshelf.model.VolumeInfo
 import com.example.bookshelf.network.BooksRepository
@@ -28,9 +33,9 @@ sealed interface DescriptionStatus {
 }
 
 
-class BooksViewModel() : ViewModel() {
+class BooksViewModel(private val repository: BooksRepository) : ViewModel() {
 
-    private val repository = BooksRepository()
+//    private val repository = BooksRepository()
 
     var appStatus: AppStatus by mutableStateOf(AppStatus.Welcome)
         private set
@@ -77,6 +82,17 @@ class BooksViewModel() : ViewModel() {
                 DescriptionStatus.Error
             } catch (e: Exception) {
                 DescriptionStatus.Error
+            }
+        }
+    }
+
+
+    companion object {
+        val factory : ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = (this[APPLICATION_KEY] as BookShelfApplication)
+                val repository = application.container.booksRepository
+                BooksViewModel(repository = repository)
             }
         }
     }
